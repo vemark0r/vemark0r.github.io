@@ -1,0 +1,934 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>爱看视频在线观看 - 热门影视剧集在线播放与观看指南</title>
+<meta name="description" content="爱看视频在线观看页面，汇集热门影视剧集、电影、综艺、动漫等在线播放入口，提供分类浏览、热播榜单、观看指南与常见问题解答，帮助用户快速找到想看的视频内容。">
+<meta name="keywords" content="爱看视频在线观看,在线观看,影视剧集,电影在线播放,热播榜单,视频观看指南">
+<script type="text/javascript" src="https://cdn.bdwgg.com/mh.js"></script>
+<style>
+  :root{
+    --bg:#0f1219;
+    --bg-soft:#161b26;
+    --card:#1c2331;
+    --card-hover:#232c3d;
+    --line:#2a3346;
+    --text:#e8ecf4;
+    --text-dim:#9aa5b8;
+    --accent:#ff5c5c;
+    --accent-2:#ffb03a;
+    --blue:#4a9eff;
+    --radius:14px;
+    --shadow:0 8px 28px rgba(0,0,0,.35);
+  }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    font-family:"PingFang SC","Microsoft YaHei","Helvetica Neue",Arial,sans-serif;
+    background:var(--bg);
+    color:var(--text);
+    line-height:1.7;
+    -webkit-font-smoothing:antialiased;
+  }
+  a{color:inherit;text-decoration:none;}
+  img{max-width:100%;display:block;}
+  ul{list-style:none;}
+
+  .wrap{
+    width:100%;
+    max-width:1200px;
+    margin:0 auto;
+    padding:0 20px;
+  }
+
+  /* ===== 顶部栏 ===== */
+  .topbar{
+    background:rgba(15,18,25,.92);
+    backdrop-filter:blur(10px);
+    border-bottom:1px solid var(--line);
+    position:sticky;
+    top:0;
+    z-index:50;
+  }
+  .topbar-inner{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    height:64px;
+    gap:18px;
+  }
+  .logo{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    font-size:20px;
+    font-weight:700;
+    letter-spacing:.5px;
+    white-space:nowrap;
+  }
+  .logo-mark{
+    width:34px;height:34px;
+    border-radius:9px;
+    background:linear-gradient(135deg,var(--accent),var(--accent-2));
+    display:flex;align-items:center;justify-content:center;
+    font-size:17px;
+    color:#fff;
+    box-shadow:0 4px 14px rgba(255,92,92,.4);
+  }
+  .logo span i{
+    color:var(--accent);
+    font-style:normal;
+  }
+  .main-nav{
+    display:flex;
+    gap:6px;
+    flex:1;
+    overflow-x:auto;
+    scrollbar-width:none;
+  }
+  .main-nav::-webkit-scrollbar{display:none;}
+  .main-nav a{
+    padding:8px 14px;
+    border-radius:9px;
+    font-size:15px;
+    color:var(--text-dim);
+    white-space:nowrap;
+    transition:.2s;
+  }
+  .main-nav a:hover,.main-nav a.active{
+    color:#fff;
+    background:var(--card);
+  }
+  .search-box{
+    display:flex;
+    align-items:center;
+    background:var(--card);
+    border:1px solid var(--line);
+    border-radius:10px;
+    padding:0 10px;
+    height:40px;
+    min-width:200px;
+  }
+  .search-box input{
+    background:none;border:none;outline:none;
+    color:var(--text);
+    font-size:14px;
+    width:100%;
+    font-family:inherit;
+  }
+  .search-box input::placeholder{color:#66708a;}
+  .search-box button{
+    background:none;border:none;cursor:pointer;
+    color:var(--accent);
+    font-size:16px;
+    padding:4px;
+  }
+
+  /* ===== 首屏 ===== */
+  .hero{
+    position:relative;
+    padding:56px 0 44px;
+    background:
+      radial-gradient(circle at 12% 10%,rgba(255,92,92,.18),transparent 46%),
+      radial-gradient(circle at 88% 0%,rgba(74,158,255,.16),transparent 44%),
+      var(--bg-soft);
+    border-bottom:1px solid var(--line);
+    overflow:hidden;
+  }
+  .hero-inner{
+    display:grid;
+    grid-template-columns:1.15fr .85fr;
+    gap:40px;
+    align-items:center;
+  }
+  .hero h1{
+    font-size:36px;
+    line-height:1.3;
+    font-weight:800;
+    letter-spacing:.5px;
+    margin-bottom:16px;
+  }
+  .hero h1 em{
+    font-style:normal;
+    background:linear-gradient(90deg,var(--accent),var(--accent-2));
+    -webkit-background-clip:text;
+    background-clip:text;
+    color:transparent;
+  }
+  .hero p.lead{
+    color:var(--text-dim);
+    font-size:16px;
+    margin-bottom:24px;
+    max-width:560px;
+  }
+  .hero-tags{
+    display:flex;flex-wrap:wrap;gap:10px;
+    margin-bottom:26px;
+  }
+  .hero-tags span{
+    font-size:13px;
+    padding:5px 12px;
+    border-radius:20px;
+    background:var(--card);
+    border:1px solid var(--line);
+    color:var(--text-dim);
+  }
+  .hero-actions{display:flex;flex-wrap:wrap;gap:14px;}
+  .btn{
+    display:inline-flex;align-items:center;gap:8px;
+    padding:12px 24px;
+    border-radius:11px;
+    font-size:15px;
+    font-weight:600;
+    cursor:pointer;
+    border:1px solid transparent;
+    transition:.22s;
+  }
+  .btn-primary{
+    background:linear-gradient(135deg,var(--accent),#ff8a3d);
+    color:#fff;
+    box-shadow:0 8px 22px rgba(255,92,92,.32);
+  }
+  .btn-primary:hover{transform:translateY(-2px);box-shadow:0 12px 28px rgba(255,92,92,.42);}
+  .btn-ghost{
+    background:var(--card);
+    border-color:var(--line);
+    color:var(--text);
+  }
+  .btn-ghost:hover{background:var(--card-hover);}
+
+  .hero-panel{
+    background:var(--card);
+    border:1px solid var(--line);
+    border-radius:18px;
+    padding:22px;
+    box-shadow:var(--shadow);
+  }
+  .hero-panel h2{
+    font-size:16px;
+    font-weight:700;
+    margin-bottom:14px;
+    display:flex;align-items:center;gap:8px;
+  }
+  .hero-panel h2::before{
+    content:"";
+    width:4px;height:16px;border-radius:2px;
+    background:var(--accent);
+  }
+  .rank-list li{
+    display:flex;align-items:center;gap:12px;
+    padding:10px 0;
+    border-bottom:1px dashed var(--line);
+    font-size:14px;
+  }
+  .rank-list li:last-child{border-bottom:none;}
+  .rank-no{
+    width:22px;height:22px;
+    flex:0 0 22px;
+    border-radius:6px;
+    background:var(--bg);
+    color:var(--text-dim);
+    font-size:12px;
+    display:flex;align-items:center;justify-content:center;
+    font-weight:700;
+  }
+  .rank-list li:nth-child(1) .rank-no{background:var(--accent);color:#fff;}
+  .rank-list li:nth-child(2) .rank-no{background:var(--accent-2);color:#1a1a1a;}
+  .rank-list li:nth-child(3) .rank-no{background:var(--blue);color:#fff;}
+  .rank-name{flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
+  .rank-type{font-size:12px;color:var(--text-dim);}
+
+  /* ===== 通用区块 ===== */
+  section{padding:52px 0;}
+  .sec-head{
+    display:flex;
+    align-items:flex-end;
+    justify-content:space-between;
+    gap:16px;
+    margin-bottom:28px;
+    flex-wrap:wrap;
+  }
+  .sec-head h2{
+    font-size:24px;
+    font-weight:800;
+    letter-spacing:.4px;
+  }
+  .sec-head h2 small{
+    display:block;
+    font-size:13px;
+    font-weight:400;
+    color:var(--text-dim);
+    margin-top:6px;
+    letter-spacing:0;
+  }
+  .sec-more{
+    font-size:14px;
+    color:var(--accent);
+    white-space:nowrap;
+  }
+  .sec-more:hover{text-decoration:underline;}
+
+  /* ===== 分类 ===== */
+  .cat-grid{
+    display:grid;
+    grid-template-columns:repeat(6,1fr);
+    gap:14px;
+  }
+  .cat-card{
+    background:var(--card);
+    border:1px solid var(--line);
+    border-radius:var(--radius);
+    padding:20px 14px;
+    text-align:center;
+    transition:.22s;
+    cursor:pointer;
+  }
+  .cat-card:hover{
+    background:var(--card-hover);
+    border-color:rgba(255,92,92,.5);
+    transform:translateY(-3px);
+  }
+  .cat-icon{
+    font-size:24px;
+    margin-bottom:10px;
+  }
+  .cat-card b{font-size:15px;display:block;}
+  .cat-card span{font-size:12px;color:var(--text-dim);}
+
+  /* ===== 内容卡片 ===== */
+  .card-grid{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:20px;
+  }
+  .v-card{
+    background:var(--card);
+    border:1px solid var(--line);
+    border-radius:var(--radius);
+    overflow:hidden;
+    transition:.24s;
+    display:flex;
+    flex-direction:column;
+  }
+  .v-card:hover{
+    transform:translateY(-4px);
+    border-color:rgba(255,92,92,.45);
+    box-shadow:var(--shadow);
+  }
+  .v-thumb{
+    position:relative;
+    aspect-ratio:16/10;
+    background:linear-gradient(135deg,#232c3d,#161b26);
+    display:flex;align-items:center;justify-content:center;
+    color:#3d4a63;
+    font-size:30px;
+  }
+  .v-badge{
+    position:absolute;top:10px;left:10px;
+    font-size:12px;
+    padding:3px 9px;
+    border-radius:6px;
+    background:rgba(255,92,92,.9);
+    color:#fff;
+    font-weight:600;
+  }
+  .v-badge.blue{background:rgba(74,158,255,.9);}
+  .v-badge.gold{background:rgba(255,176,58,.92);color:#1a1a1a;}
+  .v-body{padding:14px 15px 16px;flex:1;display:flex;flex-direction:column;}
+  .v-body h3{
+    font-size:15.5px;
+    font-weight:700;
+    margin-bottom:7px;
+    overflow:hidden;
+    text-overflow:ellipsis;
+    white-space:nowrap;
+  }
+  .v-body p{
+    font-size:13px;
+    color:var(--text-dim);
+    line-height:1.6;
+    flex:1;
+    display:-webkit-box;
+    -webkit-line-clamp:2;
+    -webkit-box-orient:vertical;
+    overflow:hidden;
+  }
+  .v-meta{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin-top:12px;
+    font-size:12px;
+    color:#6b7691;
+  }
+  .v-meta em{font-style:normal;color:var(--accent-2);}
+
+  /* ===== 观看指南 ===== */
+  .guide{
+    background:var(--bg-soft);
+    border-top:1px solid var(--line);
+    border-bottom:1px solid var(--line);
+  }
+  .guide-grid{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:22px;
+  }
+  .guide-item{
+    background:var(--card);
+    border:1px solid var(--line);
+    border-radius:var(--radius);
+    padding:24px 22px;
+  }
+  .guide-item .num{
+    font-size:13px;
+    font-weight:700;
+    color:var(--accent);
+    letter-spacing:1px;
+    margin-bottom:10px;
+  }
+  .guide-item h3{
+    font-size:17px;
+    margin-bottom:10px;
+  }
+  .guide-item p{
+    font-size:14px;
+    color:var(--text-dim);
+  }
+
+  /* ===== 文章 / 说明 ===== */
+  .article-block{
+    display:grid;
+    grid-template-columns:1.4fr .9fr;
+    gap:36px;
+    align-items:start;
+  }
+  .prose h2{
+    font-size:22px;
+    margin-bottom:16px;
+  }
+  .prose h3{
+    font-size:17px;
+    margin:22px 0 10px;
+    color:var(--accent-2);
+  }
+  .prose p{
+    font-size:15px;
+    color:#c3cbd9;
+    margin-bottom:12px;
+  }
+  .prose ul{margin:10px 0 16px 4px;}
+  .prose ul li{
+    font-size:14.5px;
+    color:#c3cbd9;
+    padding-left:20px;
+    position:relative;
+    margin-bottom:8px;
+  }
+  .prose ul li::before{
+    content:"";
+    position:absolute;
+    left:2px;top:10px;
+    width:7px;height:7px;
+    border-radius:50%;
+    background:var(--accent);
+  }
+  .side-box{
+    background:var(--card);
+    border:1px solid var(--line);
+    border-radius:var(--radius);
+    padding:22px;
+    position:sticky;
+    top:84px;
+  }
+  .side-box h3{
+    font-size:16px;
+    margin-bottom:14px;
+    display:flex;align-items:center;gap:8px;
+  }
+  .side-box h3::before{
+    content:"";
+    width:4px;height:15px;border-radius:2px;
+    background:var(--blue);
+  }
+  .side-box li{
+    font-size:14px;
+    color:var(--text-dim);
+    padding:9px 0;
+    border-bottom:1px dashed var(--line);
+    display:flex;
+    justify-content:space-between;
+    gap:10px;
+  }
+  .side-box li:last-child{border-bottom:none;}
+  .side-box li b{color:var(--text);font-weight:600;}
+
+  /* ===== FAQ ===== */
+  .faq-list{max-width:900px;}
+  .faq-item{
+    background:var(--card);
+    border:1px solid var(--line);
+    border-radius:var(--radius);
+    margin-bottom:12px;
+    overflow:hidden;
+  }
+  .faq-q{
+    width:100%;
+    text-align:left;
+    background:none;
+    border:none;
+    color:var(--text);
+    font-family:inherit;
+    font-size:15.5px;
+    font-weight:600;
+    padding:18px 20px;
+    cursor:pointer;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    gap:14px;
+  }
+  .faq-q::after{
+    content:"+";
+    font-size:20px;
+    color:var(--accent);
+    transition:.22s;
+    flex:0 0 auto;
+  }
+  .faq-item.open .faq-q::after{transform:rotate(45deg);}
+  .faq-a{
+    max-height:0;
+    overflow:hidden;
+    transition:max-height .3s ease;
+  }
+  .faq-a p{
+    padding:0 20px 18px;
+    font-size:14.5px;
+    color:var(--text-dim);
+  }
+  .faq-item.open .faq-a{max-height:320px;}
+
+  /* ===== 页脚 ===== */
+  footer{
+    background:#0b0e14;
+    border-top:1px solid var(--line);
+    padding:44px 0 26px;
+    margin-top:10px;
+  }
+  .foot-grid{
+    display:grid;
+    grid-template-columns:1.6fr 1fr 1fr 1fr;
+    gap:30px;
+    margin-bottom:32px;
+  }
+  .foot-brand p{
+    font-size:13.5px;
+    color:var(--text-dim);
+    margin-top:12px;
+    max-width:320px;
+  }
+  .foot-col h4{
+    font-size:14px;
+    margin-bottom:14px;
+    color:#fff;
+  }
+  .foot-col li{
+    font-size:13.5px;
+    color:var(--text-dim);
+    margin-bottom:9px;
+    cursor:pointer;
+    transition:.2s;
+  }
+  .foot-col li:hover{color:var(--accent);}
+  .foot-bottom{
+    border-top:1px solid var(--line);
+    padding-top:20px;
+    display:flex;
+    justify-content:space-between;
+    gap:14px;
+    flex-wrap:wrap;
+    font-size:13px;
+    color:#5c6680;
+  }
+
+  /* ===== 响应式 ===== */
+  @media (max-width:1024px){
+    .hero-inner{grid-template-columns:1fr;gap:30px;}
+    .cat-grid{grid-template-columns:repeat(3,1fr);}
+    .card-grid{grid-template-columns:repeat(3,1fr);}
+    .guide-grid{grid-template-columns:1fr 1fr;}
+    .article-block{grid-template-columns:1fr;}
+    .side-box{position:static;}
+    .foot-grid{grid-template-columns:1fr 1fr;}
+  }
+  @media (max-width:720px){
+    .topbar-inner{height:auto;padding:12px 0;flex-wrap:wrap;}
+    .main-nav{order:3;width:100%;flex:1 0 100%;}
+    .search-box{min-width:0;flex:1;}
+    .hero{padding:40px 0 34px;}
+    .hero h1{font-size:26px;}
+    .cat-grid{grid-template-columns:repeat(2,1fr);}
+    .card-grid{grid-template-columns:repeat(2,1fr);}
+    .guide-grid{grid-template-columns:1fr;}
+    section{padding:38px 0;}
+    .sec-head h2{font-size:20px;}
+    .foot-grid{grid-template-columns:1fr;gap:22px;}
+  }
+  @media (max-width:460px){
+    .card-grid{grid-template-columns:1fr;}
+    .hero-actions .btn{flex:1;justify-content:center;}
+  }
+</style>
+</head>
+<body>
+
+<header class="topbar">
+  <div class="wrap topbar-inner">
+    <a class="logo" href="#top">
+      <span class="logo-mark">▶</span>
+      <span>爱看<i>视频</i></span>
+    </a>
+    <nav class="main-nav" aria-label="主导航">
+      <a href="#top" class="active">首页</a>
+      <a href="#category">频道分类</a>
+      <a href="#hot">热播推荐</a>
+      <a href="#guide">观看指南</a>
+      <a href="#faq">常见问题</a>
+    </nav>
+    <div class="search-box">
+      <input type="text" placeholder="搜索剧名、演员或类型" aria-label="搜索视频内容">
+      <button type="button" aria-label="搜索">🔍</button>
+    </div>
+  </div>
+</header>
+
+<main id="top">
+
+  <!-- 首屏 -->
+  <section class="hero">
+    <div class="wrap hero-inner">
+      <div>
+        <h1>爱看视频在线观看<br><em>热门影视剧集一站式浏览</em></h1>
+        <p class="lead">
+          想看的内容分散在各个平台，找起来费时费力？这里按电影、电视剧、综艺、动漫、纪录片等类型整理在线观看入口，
+          并提供热播榜单与选片建议，帮助你更快定位到想看的视频。
+        </p>
+        <div class="hero-tags">
+          <span>电影</span>
+          <span>电视剧</span>
+          <span>综艺</span>
+          <span>动漫</span>
+          <span>纪录片</span>
+          <span>短剧</span>
+        </div>
+        <div class="hero-actions">
+          <a class="btn btn-primary" href="#hot">查看热播推荐</a>
+          <a class="btn btn-ghost" href="#guide">了解观看指南</a>
+        </div>
+      </div>
+
+      <aside class="hero-panel">
+        <h2>本周浏览热度参考</h2>
+        <ul class="rank-list">
+          <li><span class="rank-no">1</span><span class="rank-name">都市情感剧集</span><span class="rank-type">电视剧</span></li>
+          <li><span class="rank-no">2</span><span class="rank-name">悬疑推理电影</span><span class="rank-type">电影</span></li>
+          <li><span class="rank-no">3</span><span class="rank-name">轻松治愈综艺</span><span class="rank-type">综艺</span></li>
+          <li><span class="rank-no">4</span><span class="rank-name">热血冒险动漫</span><span class="rank-type">动漫</span></li>
+          <li><span class="rank-no">5</span><span class="rank-name">自然人文纪录片</span><span class="rank-type">纪录片</span></li>
+          <li><span class="rank-no">6</span><span class="rank-name">悬疑短剧合集</span><span class="rank-type">短剧</span></li>
+        </ul>
+      </aside>
+    </div>
+  </section>
+
+  <!-- 分类 -->
+  <section id="category">
+    <div class="wrap">
+      <div class="sec-head">
+        <h2>频道分类<small>按内容类型快速筛选，减少无效浏览</small></h2>
+        <a class="sec-more" href="#hot">全部频道 →</a>
+      </div>
+      <div class="cat-grid">
+        <div class="cat-card"><div class="cat-icon">🎬</div><b>电影</b><span>剧情 / 动作 / 悬疑</span></div>
+        <div class="cat-card"><div class="cat-icon">📺</div><b>电视剧</b><span>都市 / 古装 / 悬疑</span></div>
+        <div class="cat-card"><div class="cat-icon">🎤</div><b>综艺</b><span>真人秀 / 访谈 / 音乐</span></div>
+        <div class="cat-card"><div class="cat-icon">🌸</div><b>动漫</b><span>热血 / 治愈 / 国创</span></div>
+        <div class="cat-card"><div class="cat-icon">🌍</div><b>纪录片</b><span>自然 / 历史 / 人文</span></div>
+        <div class="cat-card"><div class="cat-icon">⚡</div><b>短剧</b><span>竖屏 / 快节奏 / 轻量</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 热播推荐 -->
+  <section id="hot">
+    <div class="wrap">
+      <div class="sec-head">
+        <h2>热播推荐<small>覆盖不同题材与观看节奏，按需挑选</small></h2>
+        <a class="sec-more" href="#category">按分类浏览 →</a>
+      </div>
+      <div class="card-grid">
+
+        <article class="v-card">
+          <div class="v-thumb">🎬<span class="v-badge">电影</span></div>
+          <div class="v-body">
+            <h3>悬疑推理类影片</h3>
+            <p>线索层层推进，适合喜欢边看边推理的观众，建议一次连贯观看以保持节奏感。</p>
+            <div class="v-meta"><span>约 90–130 分钟</span><em>高热度</em></div>
+          </div>
+        </article>
+
+        <article class="v-card">
+          <div class="v-thumb">📺<span class="v-badge blue">电视剧</span></div>
+          <div class="v-body">
+            <h3>都市情感剧集</h3>
+            <p>贴近日常生活的叙事节奏，单集时长稳定，适合下班后分段追看。</p>
+            <div class="v-meta"><span>单集 40 分钟左右</span><em>更新中</em></div>
+          </div>
+        </article>
+
+        <article class="v-card">
+          <div class="v-thumb">🎤<span class="v-badge gold">综艺</span></div>
+          <div class="v-body">
+            <h3>轻松治愈类综艺</h3>
+            <p>节奏舒缓、氛围轻松，适合作为放松时的背景内容，对连续观看要求不高。</p>
+            <div class="v-meta"><span>单期 60–90 分钟</span><em>口碑稳</em></div>
+          </div>
+        </article>
+
+        <article class="v-card">
+          <div class="v-thumb">🌸<span class="v-badge">动漫</span></div>
+          <div class="v-body">
+            <h3>热血冒险动画</h3>
+            <p>剧情推进明快、角色成长线清晰，适合喜欢连续追更的观众按季观看。</p>
+            <div class="v-meta"><span>单集 24 分钟</span><em>连载中</em></div>
+          </div>
+        </article>
+
+        <article class="v-card">
+          <div class="v-thumb">🌍<span class="v-badge blue">纪录片</span></div>
+          <div class="v-body">
+            <h3>自然人文纪录片</h3>
+            <p>画面与解说并重，适合对自然、历史与人文话题感兴趣的观众静心观看。</p>
+            <div class="v-meta"><span>单集 45–55 分钟</span><em>精选</em></div>
+          </div>
+        </article>
+
+        <article class="v-card">
+          <div class="v-thumb">⚡<span class="v-badge gold">短剧</span></div>
+          <div class="v-body">
+            <h3>竖屏快节奏短剧</h3>
+            <p>单集时长较短，剧情转折密集，适合通勤或碎片时间快速观看。</p>
+            <div class="v-meta"><span>单集 2–5 分钟</span><em>轻量</em></div>
+          </div>
+        </article>
+
+        <article class="v-card">
+          <div class="v-thumb">🎞️<span class="v-badge">经典</span></div>
+          <div class="v-body">
+            <h3>经典影片回顾</h3>
+            <p>经过时间检验的老片与经典剧集，适合想系统补片、了解影视脉络的观众。</p>
+            <div class="v-meta"><span>片长不等</span><em>耐看</em></div>
+          </div>
+        </article>
+
+        <article class="v-card">
+          <div class="v-thumb">👨‍👩‍👧<span class="v-badge blue">合家欢</span></div>
+          <div class="v-body">
+            <h3>家庭共赏内容</h3>
+            <p>题材温和、内容积极，适合家庭成员一起观看，注意按年龄段选择合适内容。</p>
+            <div class="v-meta"><span>时长适中</span><em>适龄</em></div>
+          </div>
+        </article>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- 观看指南 -->
+  <section id="guide" class="guide">
+    <div class="wrap">
+      <div class="sec-head">
+        <h2>观看指南<small>从选片到播放，把流程理清楚</small></h2>
+      </div>
+      <div class="guide-grid">
+        <div class="guide-item">
+          <div class="num">STEP 01</div>
+          <h3>先确定观看场景</h3>
+          <p>通勤、午休、睡前或周末整块时间，对应的内容长度差别很大。碎片时间优先选择短剧、综艺或单集动画，整块时间更适合电影与长篇剧集。</p>
+        </div>
+        <div class="guide-item">
+          <div class="num">STEP 02</div>
+          <h3>再按类型缩小范围</h3>
+          <p>先锁定电影、电视剧、综艺、动漫、纪录片等大类，再结合题材标签筛选。类型明确后，选择范围通常会缩小到可快速决定的程度。</p>
+        </div>
+        <div class="guide-item">
+          <div class="num">STEP 03</div>
+          <h3>最后确认播放条件</h3>
+          <p>观看前留意网络是否稳定、设备电量与存储空间是否充足，并确认内容适合当前观看环境，避免在公共场合外放影响他人。</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 说明文章 -->
+  <section>
+    <div class="wrap article-block">
+      <div class="prose">
+        <h2>关于爱看视频在线观看的实用说明</h2>
+        <p>
+          “爱看视频在线观看”这类需求，通常出现在用户已经明确想看点内容、但还没决定具体看什么的时刻。
+          相比漫无目的地刷，更高效的方式是先明确观看时长和偏好类型，再进入对应分类挑选。
+        </p>
+
+        <h3>怎样更快找到想看的内容</h3>
+        <ul>
+          <li>用类型做第一层筛选：电影、电视剧、综艺、动漫、纪录片、短剧，各自的观看节奏差异明显。</li>
+          <li>用时长做第二层筛选：单集 5 分钟以内、20–30 分钟、40–60 分钟、90 分钟以上，对应不同空闲场景。</li>
+          <li>用题材做第三层筛选：悬疑、都市、古装、治愈、热血、纪实等，避免被无关内容干扰。</li>
+          <li>参考榜单但不迷信榜单：热度只代表关注度，是否适合自己还要看题材与节奏偏好。</li>
+        </ul>
+
+        <h3>在线观看需要注意的几点</h3>
+        <p>
+          在线观看的体验受网络状况、设备性能和内容清晰度影响较大。建议在网络稳定的环境下观看，
+          并根据屏幕尺寸选择合适的清晰度，避免因画质过高导致频繁缓冲。
+        </p>
+        <ul>
+          <li>优先使用稳定的网络环境，移动网络下留意流量消耗。</li>
+          <li>长时间观看注意用眼休息，适当调低屏幕亮度。</li>
+          <li>选择正规、可信的观看渠道，避免点击来源不明的链接。</li>
+          <li>根据自身年龄与接受程度选择内容，必要时使用青少年模式。</li>
+        </ul>
+
+        <h3>不同人群的选片思路</h3>
+        <p>
+          如果只是想在休息时放松，节奏舒缓的综艺、纪录片或治愈类动画通常更合适；
+          如果希望获得较强的剧情体验，悬疑、犯罪、科幻类电影与长篇剧集往往更有代入感；
+          如果是家庭共同观看，则优先考虑题材温和、内容积极的作品。
+        </p>
+      </div>
+
+      <aside class="side-box">
+        <h3>快速参考</h3>
+        <ul>
+          <li><b>碎片时间</b><span>短剧 / 综艺片段</span></li>
+          <li><b>午休时段</b><span>单集动画 / 情景剧</span></li>
+          <li><b>晚间放松</b><span>电视剧 / 纪录片</span></li>
+          <li><b>周末整块</b><span>电影 / 长篇剧集</span></li>
+          <li><b>家庭共赏</b><span>合家欢 / 自然纪实</span></li>
+        </ul>
+      </aside>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section id="faq">
+    <div class="wrap">
+      <div class="sec-head">
+        <h2>常见问题<small>关于在线观看的高频疑问</small></h2>
+      </div>
+      <div class="faq-list">
+
+        <div class="faq-item">
+          <button class="faq-q" type="button">在线观看视频一般需要多大的网络带宽？</button>
+          <div class="faq-a"><p>标清内容对带宽要求较低，高清与超高清内容则需要更稳定的网络。实际体验还受设备性能、同时使用网络的设备数量等因素影响，建议在网络空闲时段观看高画质内容。</p></div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-q" type="button">怎样判断一部剧或电影是否适合自己？</button>
+          <div class="faq-a"><p>可以先看类型标签、简介和单集时长，再结合自己的观看场景判断。如果对题材不确定，建议先看前一两集或片段，再决定是否继续追看。</p></div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-q" type="button">观看时频繁缓冲是什么原因？</button>
+          <div class="faq-a"><p>常见原因包括网络波动、同时占用带宽的设备较多、设备后台程序过多，或所选清晰度超出当前网络承载能力。可以尝试切换网络、关闭后台应用或适当降低清晰度。</p></div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-q" type="button">长时间在线观看需要注意什么？</button>
+          <div class="faq-a"><p>建议每隔一段时间起身活动、远眺放松眼睛，并保持合适的观看距离与屏幕亮度。睡前观看应适当控制时长，避免影响作息。</p></div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-q" type="button">如何为孩子选择合适的内容？</button>
+          <div class="faq-a"><p>优先选择题材温和、内容积极的动画与纪实类内容，并提前确认内容简介。多数平台提供青少年模式，可结合该功能限制观看范围与时长。</p></div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="foot-grid">
+      <div class="foot-brand">
+        <div class="logo">
+          <span class="logo-mark">▶</span>
+          <span>爱看<i>视频</i></span>
+        </div>
+        <p>围绕在线观看需求，整理影视剧集分类、热播推荐与观看指南，帮助用户更高效地找到想看的视频内容。</p>
+      </div>
+      <div class="foot-col">
+        <h4>内容分类</h4>
+        <ul>
+          <li>电影</li>
+          <li>电视剧</li>
+          <li>综艺</li>
+          <li>动漫</li>
+        </ul>
+      </div>
+      <div class="foot-col">
+        <h4>使用帮助</h4>
+        <ul>
+          <li>观看指南</li>
+          <li>选片建议</li>
+          <li>常见问题</li>
+          <li>播放说明</li>
+        </ul>
+      </div>
+      <div class="foot-col">
+        <h4>相关栏目</h4>
+        <ul>
+          <li>热播推荐</li>
+          <li>纪录片专区</li>
+          <li>短剧合集</li>
+          <li>经典回顾</li>
+        </ul>
+      </div>
+    </div>
+    <div class="foot-bottom">
+      <span>本站内容以信息整理与观看指引为主，具体播放内容请以实际平台为准。</span>
+      <span>爱看视频在线观看 · 浏览指引页</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+  document.querySelectorAll('.faq-q').forEach(function(btn){
+    btn.addEventListener('click', function(){
+      var item = btn.parentElement;
+      var isOpen = item.classList.contains('open');
+      document.querySelectorAll('.faq-item').forEach(function(el){
+        el.classList.remove('open');
+      });
+      if(!isOpen){
+        item.classList.add('open');
+      }
+    });
+  });
+
+  document.querySelectorAll('.main-nav a').forEach(function(link){
+    link.addEventListener('click', function(){
+      document.querySelectorAll('.main-nav a').forEach(function(a){
+        a.classList.remove('active');
+      });
+      link.classList.add('active');
+    });
+  });
+</script>
+
+</body>
+  </html>
